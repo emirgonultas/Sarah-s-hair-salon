@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sara's Beauty Salon — Bronx, NY</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080606;
+    --black2: #120E0E;
+    --black3: #1E1616;
+    --rose: #B8596A;
+    --rose2: #D4849280;
+    --rose-light: #E8A8B4;
+    --rose-pale: #F5E0E4;
+    --gold: #C4964E;
+    --gold-light: #DDB97A;
+    --cream: #FAF4EE;
+    --cream2: #EEE4D8;
+    --muted: rgba(250,244,238,0.45);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.4rem 3.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(8,6,6,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,89,106,0.12);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 400; letter-spacing: 0.1em;
+    color: var(--cream);
+  }
+  .nav-logo em { font-style: italic; color: var(--rose-light); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--rose-light); }
+  .nav-book {
+    background: transparent !important;
+    border: 1px solid var(--rose) !important;
+    color: var(--rose-light) !important;
+    padding: 0.5rem 1.4rem;
+    border-radius: 1px;
+    transition: all 0.3s !important;
+  }
+  .nav-book:hover { background: var(--rose) !important; color: var(--cream) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-left {
+    padding: 10rem 4rem 6rem 5rem;
+    position: relative; z-index: 2;
+  }
+
+  .hero-right {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(135deg, #1E0E12 0%, #2A1218 40%, #1A0A10 100%);
+  }
+  .hero-right-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(184,89,106,0.04) 0px, rgba(184,89,106,0.04) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(-45deg, rgba(184,89,106,0.04) 0px, rgba(184,89,106,0.04) 1px, transparent 1px, transparent 40px);
+  }
+  .hero-right-glow {
+    position: absolute;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,89,106,0.18) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1)} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)} }
+
+  .hero-right-content {
+    position: relative; z-index: 1;
+    height: 100%; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; gap: 2rem; padding: 3rem;
+  }
+
+  .review-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(184,89,106,0.2);
+    border-radius: 4px;
+    padding: 1.5rem 1.8rem;
+    max-width: 340px;
+    backdrop-filter: blur(4px);
+    animation: fadeUp 1s ease both;
+  }
+  .review-card:nth-child(2) { animation-delay: 0.2s; margin-left: 3rem; }
+  .review-card:nth-child(3) { animation-delay: 0.4s; }
+  .review-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 0.7rem; letter-spacing: 0.1em; }
+  .review-text { font-size: 0.82rem; line-height: 1.75; color: rgba(250,244,238,0.7); font-style: italic; margin-bottom: 0.8rem; }
+  .review-name { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose-light); }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--rose-light); margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--rose); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 4.8rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--cream);
+    animation: fadeUp 0.8s ease 0.1s both;
+    margin-bottom: 1.8rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--rose-light); display: block; }
+  .hero h1 strong { font-weight: 600; }
+
+  .hero-desc {
+    font-size: 0.9rem; line-height: 1.85; color: var(--muted);
+    max-width: 400px; margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+  .btn {
+    display: inline-block; padding: 0.9rem 2.2rem;
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.3s; cursor: pointer; border: none;
+    border-radius: 1px;
+  }
+  .btn-rose { background: var(--rose); color: var(--cream); }
+  .btn-rose:hover { background: var(--rose-light); transform: translateY(-2px); }
+  .btn-ghost { border: 1px solid rgba(250,244,238,0.2); color: var(--muted); background: transparent; }
+  .btn-ghost:hover { border-color: var(--rose-light); color: var(--rose-light); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    animation: fadeUp 0.8s ease 0.45s both;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(184,89,106,0.15);
+  }
+  .stat { }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--gold-light); display: block; line-height: 1; }
+  .stat-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  /* MARQUEE */
+  .marquee-wrap { background: var(--rose); padding: 0.85rem 0; overflow: hidden; white-space: nowrap; }
+  .marquee-track { display: inline-flex; animation: marquee 25s linear infinite; }
+  .marquee-item {
+    display: inline-flex; align-items: center; gap: 1rem;
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(255,255,255,0.85); padding: 0 2.5rem;
+  }
+  .marquee-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.5); }
+  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* SECTION */
+  .section-tag {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--rose-light); display: block; margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 300; line-height: 1.15; color: var(--cream);
+  }
+  .section-title em { font-style: italic; color: var(--rose-light); }
+  .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* SERVICES */
+  .services-section {
+    background: var(--black2);
+    padding: 8rem 5rem;
+  }
+  .services-inner { max-width: 1200px; margin: 0 auto; }
+  .services-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(184,89,106,0.1);
+    border: 1px solid rgba(184,89,106,0.1);
+  }
+  .service-card {
+    background: var(--black2);
+    padding: 2.5rem 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .service-card:hover { background: var(--black3); }
+  .service-card:hover::after { opacity: 1; }
+  .service-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 1px solid rgba(184,89,106,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.3s;
+  }
+  .service-card:hover .service-icon { border-color: var(--rose); }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400; color: var(--cream);
+    margin-bottom: 0.7rem;
+  }
+  .service-desc { font-size: 0.82rem; line-height: 1.75; color: var(--muted); }
+
+  /* ABOUT */
+  .about-section {
+    padding: 8rem 5rem;
+    background: var(--black);
+    max-width: 100%;
+  }
+  .about-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: center;
+  }
+  .about-left { }
+  .about-right { }
+  .about-right p {
+    font-size: 0.95rem; line-height: 1.95; color: var(--muted); margin-bottom: 1.5rem;
+  }
+  .about-features { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .about-feature {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(184,89,106,0.12);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .about-feature:hover { border-color: rgba(184,89,106,0.3); background: rgba(184,89,106,0.03); }
+  .af-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(184,89,106,0.1);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .af-text { font-size: 0.85rem; color: var(--cream2); }
+  .af-text strong { display: block; font-weight: 500; margin-bottom: 2px; color: var(--cream); }
+
+  /* BIG QUOTE */
+  .quote-section {
+    background: var(--black3);
+    padding: 6rem 5rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .quote-section::before {
+    content: '"';
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25rem; line-height: 1;
+    color: rgba(184,89,106,0.04);
+    top: -4rem; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .quote-inner { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 300; font-style: italic; line-height: 1.5;
+    color: var(--cream2); margin-bottom: 1.5rem;
+  }
+  .quote-author { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rose-light); }
+
+  /* REVIEWS */
+  .reviews-section {
+    background: var(--black2);
+    padding: 8rem 5rem;
+  }
+  .reviews-inner { max-width: 1200px; margin: 0 auto; }
+  .reviews-header { text-align: center; margin-bottom: 4rem; }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .review-full {
+    background: var(--black3);
+    border: 1px solid rgba(184,89,106,0.1);
+    border-radius: 2px; padding: 2rem;
+    transition: all 0.3s;
+  }
+  .review-full:hover { border-color: rgba(184,89,106,0.3); transform: translateY(-4px); }
+  .rf-stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .rf-text { font-size: 0.85rem; line-height: 1.8; color: var(--muted); font-style: italic; margin-bottom: 1.2rem; }
+  .rf-name { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose-light); }
+  .rf-date { font-size: 0.65rem; color: rgba(250,244,238,0.25); margin-top: 0.2rem; }
+
+  /* INFO */
+  .info-section {
+    background: var(--black);
+    padding: 8rem 5rem;
+    border-top: 1px solid rgba(184,89,106,0.1);
+  }
+  .info-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5rem; }
+  .info-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; color: var(--cream);
+    margin-bottom: 1.8rem; padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(184,89,106,0.15);
+  }
+  .hours-row {
+    display: flex; justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.82rem;
+  }
+  .hours-row .day { color: var(--muted); }
+  .hours-row .time { color: var(--cream2); }
+  .hours-row.today .day, .hours-row.today .time { color: var(--rose-light); }
+  .contact-row {
+    display: flex; align-items: flex-start; gap: 0.9rem;
+    padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.82rem; color: var(--muted);
+  }
+  .contact-row svg { flex-shrink: 0; margin-top: 2px; opacity: 0.5; }
+  .contact-row a { color: var(--rose-light); text-decoration: none; transition: color 0.3s; }
+  .contact-row a:hover { color: var(--cream); }
+  .amenity-tag {
+    display: inline-block; font-size: 0.7rem; padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(184,89,106,0.2); border-radius: 1px;
+    color: var(--muted); margin: 0.3rem 0.2rem 0 0; letter-spacing: 0.05em;
+    transition: all 0.3s;
+  }
+  .amenity-tag:hover { border-color: var(--rose-light); color: var(--rose-light); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black2);
+    border-top: 1px solid rgba(184,89,106,0.12);
+    padding: 3rem 5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--cream);
+  }
+  .footer-logo em { font-style: italic; color: var(--rose-light); }
+  .footer-rating {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.75rem; color: var(--muted);
+  }
+  .footer-rating .stars { color: var(--gold); }
+  .footer-copy { font-size: 0.7rem; color: rgba(250,244,238,0.2); }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    .hero-right { display: none; }
+    .services-section, .about-section, .reviews-section, .info-section { padding: 5rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .info-inner { grid-template-columns: 1fr; gap: 3rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Sara's <em>Beauty Salon</em></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.instagram.com/hairbyvalmira/" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a></li>
+    <li><a href="https://wa.me/17187084401" target="_blank" class="nav-book">Book Now · WhatsApp</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Bronx, New York · Est. Beauty Boutique</div>
+    <h1>
+      <strong>Where Beauty</strong>
+      <em>Meets Artistry</em>
+    </h1>
+    <p class="hero-desc">Sara's Beauty Salon is Bronx's hidden gem. Expert color, cut, and styling by Valmira and her team — where every client leaves feeling their most beautiful.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/17187084401" target="_blank" class="btn btn-rose">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white" style="margin-right:6px;vertical-align:middle;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.857L.057 23.882l6.196-1.453A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.018-1.374l-.36-.214-3.724.873.916-3.626-.235-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+        Book on WhatsApp
+      </a>
+      <a href="tel:17187084401" class="btn btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:middle;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call Us
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">4.8</span>
+        <span class="stat-label">★ Google Rating</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">106+</span>
+        <span class="stat-label">Happy Clients</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">8+</span>
+        <span class="stat-label">Years of Trust</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <div class="hero-right-pattern"></div>
+    <div class="hero-right-glow"></div>
+    <div class="hero-right-content">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"She's quite literally the best, hands down. I've been with Val for 8 years and I will never let another person touch my hair."</p>
+        <div class="review-name">— Amanda Correa-Suarez</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Lola took her time with a thorough consultation, talking me through my expectations. Great experience!"</p>
+        <div class="review-name">— Dusty Garcia</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Very pleasant and welcoming since day 1. She is amazing and works fast — always takes care of you on time."</p>
+        <div class="review-name">— Raisa Guzman</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span> Hair Coloring</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Cut & Styling</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Balayage</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Highlights</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Blowout</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Color Correction</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Treatments</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> LGBTQ+ Friendly</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Hair Coloring</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Cut & Styling</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Balayage</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Highlights</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Blowout</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Color Correction</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Treatments</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> LGBTQ+ Friendly</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="services-inner">
+    <div class="services-header reveal">
+      <div>
+        <span class="section-tag">What We Offer</span>
+        <h2 class="section-title">Our <em>Services</em></h2>
+      </div>
+      <a href="tel:17187084401" class="btn btn-ghost">Book a Session</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="service-name">Color & Highlights</div>
+        <p class="service-desc">From bold transformations to subtle sun-kissed balayage. We specialize in color correction and custom blends tailored to you.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3L8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+        </div>
+        <div class="service-name">Cut & Styling</div>
+        <p class="service-desc">Precision cuts and expert blowouts that complement your face shape and lifestyle. Every cut tells your story.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97 0 9-3.58 9-8 0-3.5-2.5-6.5-6-7.5C14 5 13 3 12 2c0 0-1 3-3 4.5C5.5 7.5 3 10.5 3 14c0 4.42 4.03 8 9 8z"/></svg>
+        </div>
+        <div class="service-name">Hair Treatments</div>
+        <p class="service-desc">Deep conditioning, keratin, and repair treatments to restore your hair's natural shine, strength and vitality.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <div class="service-name">Consultation</div>
+        <p class="service-desc">Every visit starts with a thorough consultation. We listen to your vision and guide you toward the best results for your hair type.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="service-name">Blowout & Finish</div>
+        <p class="service-desc">Professional blowouts that last. Whether sleek and straight or voluminous waves — we deliver a flawless finish every time.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="service-name">Special Occasions</div>
+        <p class="service-desc">Bridal, prom, or any special event — let us create a look that makes you unforgettable. Book early for availability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="quote-inner reveal">
+    <p class="quote-text">"I had been neglecting my hair and needed a full makeover — and I was not disappointed. I wish I could show the before and after!"</p>
+    <div class="quote-author">— Emmely Paradise, Verified Client</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="about-inner">
+    <div class="about-left reveal">
+      <span class="section-tag">Our Story</span>
+      <h2 class="section-title" style="margin-bottom:2rem;">More than a salon —<br><em>a sanctuary</em></h2>
+      <div style="width:48px;height:2px;background:var(--rose);margin-bottom:2rem;"></div>
+      <p style="font-size:0.95rem;line-height:1.95;color:var(--muted);margin-bottom:1.2rem;">Sara's Beauty Salon has been serving the Bronx community with passion and expertise. Led by the talented Valmira, our boutique salon is built on trust, artistry, and a genuine love for making people feel their best.</p>
+      <p style="font-size:0.95rem;line-height:1.95;color:var(--muted);">We believe beauty is personal. That's why every appointment begins with listening — understanding your hair, your lifestyle, and your vision before we even pick up the scissors.</p>
+    </div>
+    <div class="about-right reveal">
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="af-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <div class="af-text"><strong>By Appointment Only</strong>Your time is valued — no waiting, just you.</div>
+        </div>
+        <div class="about-feature">
+          <div class="af-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="af-text"><strong>LGBTQ+ Friendly</strong>A welcoming, inclusive space for everyone.</div>
+        </div>
+        <div class="about-feature">
+          <div class="af-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="af-text"><strong>Wheelchair Accessible</strong>Fully accessible entrance for all clients.</div>
+        </div>
+        <div class="about-feature">
+          <div class="af-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="af-text"><strong>Free Wi-Fi</strong>Stay connected while you relax and transform.</div>
+        </div>
+        <div class="about-feature">
+          <div class="af-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8596A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="af-text"><strong>Cash Only</strong>Please bring cash for payment — ATM nearby.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reviews-section">
+  <div class="reviews-inner">
+    <div class="reviews-header reveal">
+      <span class="section-tag">Client Love</span>
+      <h2 class="section-title">What our clients <em>say</em></h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-full reveal">
+        <div class="rf-stars">★★★★★</div>
+        <p class="rf-text">"She's quite literally the best, hands down. I've been with Val for 8 years and I will never let another person touch my hair. She fixes color, she makes you feel beautiful, she listens and advises you on what's best for your hair."</p>
+        <div class="rf-name">Amanda Correa-Suarez</div>
+        <div class="rf-date">2 years ago</div>
+      </div>
+      <div class="review-full reveal">
+        <div class="rf-stars">★★★★★</div>
+        <p class="rf-text">"Valmira was friendly and very insightful with me. The salon was very clean and maintained, and she did a fantastic job with cut and styling. She really listened to what I wanted and delivered beyond my expectations."</p>
+        <div class="rf-name">Afsana</div>
+        <div class="rf-date">4 months ago</div>
+      </div>
+      <div class="review-full reveal">
+        <div class="rf-stars">★★★★★</div>
+        <p class="rf-text">"Very pleasant and welcoming since day 1. I randomly walked in for a blowout and completely loved it. I have been with her ever since 2021. She is amazing, works fast, and always takes care of you on time."</p>
+        <div class="rf-name">Raisa Guzman</div>
+        <div class="rf-date">5 months ago</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;" class="reveal">
+      <div style="display:inline-flex;align-items:center;gap:1rem;background:rgba(184,89,106,0.08);border:1px solid rgba(184,89,106,0.2);padding:1rem 2rem;border-radius:2px;">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold-light);">4.8</span>
+        <div>
+          <div style="color:var(--gold);font-size:1rem;letter-spacing:0.1em;">★★★★★</div>
+          <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:0.2rem;">106 Google Reviews</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section id="contact" class="info-section">
+  <div class="info-inner">
+    <div class="info-block reveal">
+      <h3>Hours</h3>
+      <div class="hours-row"><span class="day">Monday</span><span class="time">10:00 AM – 7:00 PM</span></div>
+      <div class="hours-row"><span class="day">Tuesday</span><span class="time">10:00 AM – 7:00 PM</span></div>
+      <div class="hours-row"><span class="day">Wednesday</span><span class="time">10:00 AM – 7:00 PM</span></div>
+      <div class="hours-row"><span class="day">Thursday</span><span class="time">10:00 AM – 7:00 PM</span></div>
+      <div class="hours-row today"><span class="day">Friday ★</span><span class="time">10:00 AM – 7:00 PM</span></div>
+      <div class="hours-row today"><span class="day">Saturday ★</span><span class="time">10:00 AM – 6:00 PM</span></div>
+      <div class="hours-row"><span class="day">Sunday</span><span class="time">Closed</span></div>
+      <p style="font-size:0.72rem;color:rgba(250,244,238,0.25);margin-top:1rem;">★ By appointment — book in advance</p>
+    </div>
+
+    <div class="info-block reveal">
+      <h3>Contact</h3>
+      <div class="contact-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:17187084401">+1 718-708-4401</a>
+      </div>
+      <div class="contact-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8596A" style="flex-shrink:0;margin-top:2px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.857L.057 23.882l6.196-1.453A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.018-1.374l-.36-.214-3.724.873.916-3.626-.235-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+        <a href="https://wa.me/17187084401" target="_blank">WhatsApp Booking</a>
+      </div>
+      <div class="contact-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <a href="https://www.instagram.com/hairbyvalmira/" target="_blank">@hairbyvalmira</a>
+      </div>
+      <div class="contact-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>3120 Bainbridge Ave, Bronx, NY 10467</span>
+      </div>
+      <div class="contact-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span>Cash only — ATM available nearby</span>
+      </div>
+      <div class="contact-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <span>Street parking available on Bainbridge Ave</span>
+      </div>
+      <a href="https://maps.google.com/?q=3120+Bainbridge+Ave+Bronx+NY+10467" target="_blank" style="display:inline-flex;align-items:center;gap:0.6rem;margin-top:1.2rem;font-size:0.75rem;letter-spacing:0.1em;color:var(--rose-light);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(184,89,106,0.3);padding-bottom:0.2rem;transition:all 0.3s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--rose-light)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Get Directions
+      </a>
+    </div>
+
+    <div class="info-block reveal">
+      <h3>Good to Know</h3>
+      <div style="margin-bottom:1.5rem;">
+        <span class="amenity-tag">Appointment Required</span>
+        <span class="amenity-tag">Walk-ins Welcome</span>
+        <span class="amenity-tag">Wheelchair Accessible</span>
+        <span class="amenity-tag">LGBTQ+ Friendly</span>
+        <span class="amenity-tag">Free Wi-Fi</span>
+        <span class="amenity-tag">Cash Only</span>
+        <span class="amenity-tag">Kid Friendly</span>
+        <span class="amenity-tag">Street Parking</span>
+      </div>
+      <div style="margin-top:2rem;">
+        <a href="https://wa.me/17187084401" target="_blank" class="btn btn-rose" style="width:100%;text-align:center;display:block;">
+          Book on WhatsApp
+        </a>
+        <a href="tel:17187084401" class="btn btn-ghost" style="width:100%;text-align:center;display:block;margin-top:0.6rem;">
+          Call +1 718-708-4401
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Sara's <em>Beauty Salon</em></div>
+  <div class="footer-rating">
+    <span class="stars">★★★★★</span>
+    <span>4.8 / 5 · 106 Google Reviews · Bronx, NY</span>
+  </div>
+  <div class="footer-copy">© 2025 Sara's Beauty Salon. All rights reserved.</div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+reveals.forEach(r => observer.observe(r));
+</script>
+
+</body>
+</html>
